@@ -1,0 +1,38 @@
+#port 8888 is the default port for the config server
+server:
+  port: 8888
+
+# actuator port
+management:
+  server:
+    port: 8081
+  endpoints:
+    web.exposure.include: '*'
+
+spring:
+  application:
+    name: configserver
+  profiles:
+    active: vault
+
+  cloud:
+    config:
+      server:
+        vault:
+          port: 8200
+          host: localhost
+          scheme: http
+          kv-version: 2
+          authentication: TOKEN
+          token: s.kRCZViw9bMp6g87FKY46Tvtc
+    bus:
+      enabled: true
+      id: configserver
+    stream:
+      kafka.binder:
+          zkNodes: localhost:2181
+          brokers: localhost:9092
+
+logging:
+  level:
+    org.springframework.web.client: TRACE

@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  postgres-db:
+    container_name: postgres-db
+    networks:
+      - net
+    image: postgres
+    environment:
+      - POSTGRES_HOST
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    ports:
+      - "5432:5432"
+    restart: always
+
+networks:
+  net:
+    driver: bridge
